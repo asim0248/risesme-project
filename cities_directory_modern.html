@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UK Cities Directory | Browse All Cities</title>
+  <meta name="description"
+    content="Explore all UK cities and discover local businesses, services, and opportunities in your area.">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ===== DESIGN SYSTEM ===== */
+
+    :root {
+      --primary: #1E40AF;
+      --primary-dark: #1E3A8A;
+      --accent: #0EA5E9;
+      --accent-light: #06B6D4;
+      --success: #10B981;
+      --warning: #F59E0B;
+      --danger: #EF4444;
+      --bg-light: #F8F9FA;
+      --bg-white: #FFFFFF;
+      --text-dark: #1F2937;
+      --text-muted: #6B7280;
+      --border-light: #E5E7EB;
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --shadow-md: 0 12px 24px rgba(0, 0, 0, 0.12);
+      --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    p {
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 1200px;
+    }
+
+    /* ===== SEARCH & FILTER SECTION ===== */
+
+    .search-filter-section {
+      background: var(--bg-white);
+      padding: 40px 20px;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .search-input-wrapper {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .search-input-wrapper input {
+      width: 100%;
+      padding: 14px 20px;
+      padding-left: 45px;
+      border: 2px solid var(--border-light);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .search-input-wrapper input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.1);
+      outline: none;
+    }
+
+    .search-input-wrapper i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .filter-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .filter-tag {
+      background: var(--bg-light);
+      color: var(--text-dark);
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .filter-tag:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .filter-tag.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* ===== FEATURED CITIES SECTION ===== */
+
+    .featured-cities-section {
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #F8F9FA 0%, #F0F9FF 100%);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      margin-bottom: 10px;
+      color: var(--text-dark);
+    }
+
+    .section-title p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .featured-card {
+      background: var(--bg-white);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      border: 2px solid transparent;
+      position: relative;
+    }
+
+    .featured-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent);
+    }
+
+    .featured-card-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-card-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .featured-card:hover .featured-card-image::after {
+      left: 100%;
+    }
+
+    .featured-card-content {
+      padding: 25px;
+    }
+
+    .featured-card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+    }
+
+    .featured-card-meta {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .featured-card-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .featured-card-meta i {
+      color: var(--accent);
+    }
+
+    .featured-card-description {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .featured-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 15px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .featured-card-link {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .featured-card-link:hover {
+      color: var(--accent);
+    }
+
+    .featured-card-badge {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    /* ===== CITIES GRID SECTION ===== */
+
+    .cities-grid-section {
+      padding: 60px 20px;
+      background: var(--bg-white);
+    }
+
+    .cities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+
+    .city-item {
+      background: var(--bg-light);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .city-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .city-item:hover::before {
+      left: 100%;
+    }
+
+    .city-item:hover {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent);
+    }
+
+    .city-item-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    .city-item:hover .city-item-icon {
+      color: var(--accent);
+      transform: scale(1.2);
+    }
+
+    .city-item-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: var(--text-dark);
+      transition: all 0.3s ease;
+    }
+
+    .city-item:hover .city-item-name {
+      color: white;
+    }
+
+    .city-item-count {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: all 0.3s ease;
+    }
+
+    .city-item:hover .city-item-count {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* ===== STATS SECTION ===== */
+
+    .stats-section {
+      padding: 60px 20px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      text-align: center;
+    }
+
+    .stat-item h3 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: white;
+    }
+
+    .stat-item p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1rem;
+    }
+
+    /* ===== CATEGORIES SECTION ===== */
+
+    .categories-section {
+      padding: 60px 20px;
+      background: var(--bg-light);
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .category-card {
+      background: var(--bg-white);
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .category-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .category-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: var(--accent);
+    }
+
+    .category-card h4 {
+      margin-bottom: 10px;
+      color: var(--text-dark);
+    }
+
+    .category-card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== ALPHABETICAL INDEX ===== */
+
+    .alphabet-index {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      padding: 30px 0;
+      margin-bottom: 40px;
+    }
+
+    .alphabet-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-light);
+      border: 2px solid transparent;
+      color: var(--text-dark);
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .alphabet-btn:hover {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: white;
+      transform: scale(1.15);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* ===== RESPONSIVE ===== */
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .featured-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cities-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .search-filter-section {
+        padding: 30px 15px;
+      }
+
+      .featured-cities-section,
+      .cities-grid-section,
+      .categories-section {
+        padding: 40px 15px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+      }
+
+      .featured-grid {
+        gap: 15px;
+      }
+
+      .cities-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-item h3 {
+        font-size: 2rem;
+      }
+
+      .alphabet-index {
+        gap: 6px;
+      }
+
+      .alphabet-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 0.85rem;
+      }
+    }
+
+    /* ===== ANIMATIONS ===== */
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .featured-card {
+      animation: fadeInUp 0.5s ease-out forwards;
+    }
+
+    .featured-card:nth-child(1) {
+      animation-delay: 0.05s;
+    }
+
+    .featured-card:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .featured-card:nth-child(3) {
+      animation-delay: 0.15s;
+    }
+
+    .featured-card:nth-child(4) {
+      animation-delay: 0.2s;
+    }
+
+    .featured-card:nth-child(5) {
+      animation-delay: 0.25s;
+    }
+
+    .featured-card:nth-child(6) {
+      animation-delay: 0.3s;
+    }
+
+    .city-item {
+      animation: fadeInUp 0.5s ease-out forwards;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SEARCH & FILTER SECTION -->
+  <div class="search-filter-section">
+    <div class="container">
+      <h1 style="margin-bottom: 30px; text-align: center;">Discover UK Cities</h1>
+
+      <div class="search-input-wrapper">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search cities by name or postcode...">
+      </div>
+
+      <div class="filter-tags">
+        <span class="filter-tag active">All Cities</span>
+        <span class="filter-tag">Major Cities</span>
+        <span class="filter-tag">Coastal Towns</span>
+        <span class="filter-tag">Historic Cities</span>
+        <span class="filter-tag">University Towns</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURED CITIES SECTION -->
+  <div class="featured-cities-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Featured Cities</h2>
+        <p>Explore our most popular destinations with thriving business communities</p>
+      </div>
+
+      <div class="featured-grid">
+        <!-- London -->
+        <div class="featured-card">
+          <div class="featured-card-image">
+            <i class="fas fa-building"></i>
+          </div>
+          <div class="featured-card-content">
+            <h3 class="featured-card-title">London</h3>
+            <div class="featured-card-meta">
+              <span><i class="fas fa-briefcase"></i> 5,800 Businesses</span>
+              <span><i class="fas fa-users"></i> 9M+ Population</span>
+            </div>
+            <p class="featured-card-description">The capital city with the largest business ecosystem in the UK.
+              Finance, tech, and creative industries thrive here.</p>
+            <div class="featured-card-footer">
+              <a href="#" class="featured-card-link">Explore <i class="fas fa-arrow-right"></i></a>
+              <span class="featured-card-badge">Top Rated</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Manchester -->
+        <div class="featured-card">
+          <div class="featured-card-image">
+            <i class="fas fa-industry"></i>
+          </div>
+          <div class="featured-card-content">
+            <h3 class="featured-card-title">Manchester</h3>
+            <div class="featured-card-meta">
+              <span><i class="fas fa-briefcase"></i> 2,100 Businesses</span>
+              <span><i class="fas fa-users"></i> 547K Population</span>
+            </div>
+            <p class="featured-card-description">A vibrant hub for manufacturing, media, and technology. Strong business
+              growth and innovation ecosystem.</p>
+            <div class="featured-card-footer">
+              <a href="#" class="featured-card-link">Explore <i class="fas fa-arrow-right"></i></a>
+              <span class="featured-card-badge">Growing</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Birmingham -->
+        <div class="featured-card">
+          <div class="featured-card-image">
+            <i class="fas fa-city"></i>
+          </div>
+          <div class="featured-card-content">
+            <h3 class="featured-card-title">Birmingham</h3>
+            <div class="featured-card-meta">
+              <span><i class="fas fa-briefcase"></i> 1,250 Businesses</span>
+              <span><i class="fas fa-users"></i> 1.1M Population</span>
+            </div>
+            <p class="featured-card-description">England's second-largest city with diverse industries including
+              manufacturing, retail, and professional services.</p>
+            <div class="featured-card-footer">
+              <a href="#" class="featured-card-link">Explore <i class="fas fa-arrow-right"></i></a>
+              <span class="featured-card-badge">Popular</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS SECTION -->
+  <div class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <h3>150+</h3>
+          <p>UK Cities & Towns</p>
+        </div>
+        <div class="stat-item">
+          <h3>45K+</h3>
+          <p>Verified Businesses</p>
+        </div>
+        <div class="stat-item">
+          <h3>2M+</h3>
+          <p>Active Users</p>
+        </div>
+        <div class="stat-item">
+          <h3>98%</h3>
+          <p>Satisfaction Rate</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CITIES GRID SECTION -->
+  <div class="cities-grid-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Browse All Cities</h2>
+        <p>Find businesses and services in your city</p>
+      </div>
+
+      <!-- Alphabetical Index -->
+      <div class="alphabet-index">
+        <button class="alphabet-btn">A</button>
+        <button class="alphabet-btn">B</button>
+        <button class="alphabet-btn">C</button>
+        <button class="alphabet-btn">D</button>
+        <button class="alphabet-btn">E</button>
+        <button class="alphabet-btn">F</button>
+        <button class="alphabet-btn">G</button>
+        <button class="alphabet-btn">H</button>
+        <button class="alphabet-btn">I</button>
+        <button class="alphabet-btn">L</button>
+        <button class="alphabet-btn">M</button>
+        <button class="alphabet-btn">N</button>
+        <button class="alphabet-btn">O</button>
+        <button class="alphabet-btn">P</button>
+        <button class="alphabet-btn">S</button>
+        <button class="alphabet-btn">T</button>
+        <button class="alphabet-btn">W</button>
+        <button class="alphabet-btn">Y</button>
+      </div>
+
+      <!-- Cities Grid -->
+      <div class="cities-grid">
+        <!-- A Cities -->
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Aberdeen</div>
+          <div class="city-item-count">320 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Abingdon</div>
+          <div class="city-item-count">48 Businesses</div>
+        </div>
+
+        <!-- B Cities -->
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Bath</div>
+          <div class="city-item-count">145 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Belfast</div>
+          <div class="city-item-count">410 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Birmingham</div>
+          <div class="city-item-count">1,250 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Bristol</div>
+          <div class="city-item-count">690 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Bradford</div>
+          <div class="city-item-count">380 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Brighton</div>
+          <div class="city-item-count">520 Businesses</div>
+        </div>
+
+        <!-- C Cities -->
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Cambridge</div>
+          <div class="city-item-count">280 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Cardiff</div>
+          <div class="city-item-count">420 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Coventry</div>
+          <div class="city-item-count">350 Businesses</div>
+        </div>
+
+        <!-- D Cities -->
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Derby</div>
+          <div class="city-item-count">290 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Doncaster</div>
+          <div class="city-item-count">210 Businesses</div>
+        </div>
+
+        <!-- E Cities -->
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Edinburgh</div>
+          <div class="city-item-count">580 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Exeter</div>
+          <div class="city-item-count">240 Businesses</div>
+        </div>
+
+        <!-- L Cities -->
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Leeds</div>
+          <div class="city-item-count">520 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Leicester</div>
+          <div class="city-item-count">380 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Liverpool</div>
+          <div class="city-item-count">610 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">London</div>
+          <div class="city-item-count">5,800 Businesses</div>
+        </div>
+
+        <!-- M Cities -->
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Manchester</div>
+          <div class="city-item-count">2,100 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Milton Keynes</div>
+          <div class="city-item-count">420 Businesses</div>
+        </div>
+
+        <!-- N Cities -->
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Newcastle</div>
+          <div class="city-item-count">480 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Nottingham</div>
+          <div class="city-item-count">390 Businesses</div>
+        </div>
+
+        <!-- O Cities -->
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Oxford</div>
+          <div class="city-item-count">310 Businesses</div>
+        </div>
+
+        <!-- S Cities -->
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Sheffield</div>
+          <div class="city-item-count">520 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Southampton</div>
+          <div class="city-item-count">280 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Stoke-on-Trent</div>
+          <div class="city-item-count">220 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Swansea</div>
+          <div class="city-item-count">310 Businesses</div>
+        </div>
+
+        <!-- W Cities -->
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Wolverhampton</div>
+          <div class="city-item-count">290 Businesses</div>
+        </div>
+
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">Worcester</div>
+          <div class="city-item-count">180 Businesses</div>
+        </div>
+
+        <!-- Y Cities -->
+        <div class="city-item">
+          <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="city-item-name">York</div>
+          <div class="city-item-count">240 Businesses</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES SECTION -->
+  <div class="categories-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Browse by Category</h2>
+        <p>Find businesses by industry and service type</p>
+      </div>
+
+      <div class="categories-grid">
+        <div class="category-card">
+          <div class="category-icon"><i class="fas fa-wrench"></i></div>
+          <h4>Home Services</h4>
+          <p>Plumbers, electricians, carpenters, and more</p>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon"><i class="fas fa-utensils"></i></div>
+          <h4>Restaurants & Cafes</h4>
+          <p>Dining, takeaway, and catering services</p>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon"><i class="fas fa-briefcase"></i></div>
+          <h4>Professional Services</h4>
+          <p>Accountants, lawyers, consultants</p>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon"><i class="fas fa-heartbeat"></i></div>
+          <h4>Health & Wellness</h4>
+          <p>Doctors, dentists, fitness centers</p>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon"><i class="fas fa-laptop"></i></div>
+          <h4>Digital & Tech</h4>
+          <p>Web design, IT support, digital marketing</p>
+        </div>
+
+        <div class="category-card">
+          <div class="category-icon"><i class="fas fa-shopping-bag"></i></div>
+          <h4>Retail & Shopping</h4>
+          <p>Shops, boutiques, and shopping centers</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Simple search functionality
+    document.querySelector('.search-input-wrapper input').addEventListener('keyup', function (e) {
+      const searchTerm = e.target.value.toLowerCase();
+      const cityItems = document.querySelectorAll('.city-item');
+
+      cityItems.forEach(item => {
+        const cityName = item.querySelector('.city-item-name').textContent.toLowerCase();
+        if (cityName.includes(searchTerm)) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+
+    // Filter tags functionality
+    document.querySelectorAll('.filter-tag').forEach(tag => {
+      tag.addEventListener('click', function () {
+        document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Alphabet index functionality
+    document.querySelectorAll('.alphabet-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const letter = this.textContent;
+        const cityItems = document.querySelectorAll('.city-item');
+
+        cityItems.forEach(item => {
+          const cityName = item.querySelector('.city-item-name').textContent;
+          if (cityName.charAt(0).toUpperCase() === letter) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+
+</html>

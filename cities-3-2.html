@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Browse UK Cities | Business Directory</title>
+<meta name="description" content="Browse all UK cities and explore local businesses, services, and professionals in your area.">
+
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --primary:#1e40af;
+  --primary-dark:#1e3a8a;
+  --bg:#f4f6fb;
+  --white:#ffffff;
+  --text:#1f2937;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  --shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+body{
+  background:var(--bg);
+  font-family:'Inter',sans-serif;
+  color:var(--text);
+}
+
+h1,h2{
+  font-family:'Poppins',sans-serif;
+}
+
+/* HERO */
+.hero{
+  background:linear-gradient(135deg,#1e40af,#2563eb);
+  color:#fff;
+  padding:70px 20px 90px;
+  text-align:center;
+}
+.hero h1{
+  font-size:42px;
+  font-weight:800;
+}
+.hero p{
+  max-width:800px;
+  margin:12px auto 0;
+  opacity:.95;
+}
+
+/* SEARCH */
+.search-wrap{
+  background:#fff;
+  max-width:900px;
+  margin:-45px auto 40px;
+  padding:20px;
+  border-radius:16px;
+  box-shadow:var(--shadow);
+}
+.search-wrap input{
+  height:56px;
+  border-radius:30px;
+  padding-left:50px;
+  font-size:16px;
+}
+.search-icon{
+  position:absolute;
+  left:25px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--muted);
+}
+
+/* ALPHABET */
+.alphabet{
+  text-align:center;
+  margin-bottom:35px;
+}
+.alphabet button{
+  width:42px;
+  height:42px;
+  margin:6px;
+  border-radius:50%;
+  border:none;
+  background:#eef2ff;
+  color:var(--primary);
+  font-weight:700;
+  transition:.25s;
+}
+.alphabet button:hover,
+.alphabet button.active{
+  background:var(--primary);
+  color:#fff;
+  transform:scale(1.1);
+}
+
+/* CITY GRID */
+.city-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+  gap:18px;
+}
+.city-card{
+  background:#fff;
+  border-radius:16px;
+  padding:22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 8px 22px rgba(0,0,0,.07);
+  transition:.3s;
+  cursor:pointer;
+}
+.city-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.city-icon{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  background:#eef2ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--primary);
+  font-size:18px;
+}
+.city-name{
+  font-weight:700;
+}
+.city-count{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.city-card:hover{
+  background:linear-gradient(135deg,#1e40af,#2563eb);
+  color:#fff;
+  transform:translateY(-5px);
+}
+.city-card:hover .city-icon{
+  background:#fff;
+  color:#1e40af;
+}
+.city-card:hover .city-count{
+  color:#e0e7ff;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .hero h1{font-size:30px;}
+  .city-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Browse UK Cities</h1>
+  <p>Explore local businesses, services, and professionals across cities in the United Kingdom.</p>
+</div>
+
+<div class="container">
+
+  <!-- SEARCH -->
+  <div class="search-wrap position-relative">
+    <i class="fa fa-search search-icon"></i>
+    <input type="text" id="citySearch" class="form-control" placeholder="Search city (e.g. London, Manchester)">
+  </div>
+
+  <!-- ALPHABET -->
+  <div class="alphabet">
+    <button class="active">All</button>
+    <button>A</button><button>B</button><button>C</button><button>D</button>
+    <button>E</button><button>L</button><button>M</button><button>N</button>
+    <button>O</button><button>S</button><button>W</button><button>Y</button>
+  </div>
+
+  <!-- CITY GRID -->
+  <div class="city-grid" id="cityGrid">
+
+    <div class="city-card">
+      <div class="city-left">
+        <div class="city-icon"><i class="fa fa-city"></i></div>
+        <div>
+          <div class="city-name">London</div>
+          <div class="city-count">5,800 Businesses</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="city-card">
+      <div class="city-left">
+        <div class="city-icon"><i class="fa fa-city"></i></div>
+        <div>
+          <div class="city-name">Manchester</div>
+          <div class="city-count">2,100 Businesses</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="city-card">
+      <div class="city-left">
+        <div class="city-icon"><i class="fa fa-city"></i></div>
+        <div>
+          <div class="city-name">Birmingham</div>
+          <div class="city-count">1,250 Businesses</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="city-card">
+      <div class="city-left">
+        <div class="city-icon"><i class="fa fa-city"></i></div>
+        <div>
+          <div class="city-name">Leeds</div>
+          <div class="city-count">520 Businesses</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="city-card">
+      <div class="city-left">
+        <div class="city-icon"><i class="fa fa-city"></i></div>
+        <div>
+          <div class="city-name">Liverpool</div>
+          <div class="city-count">610 Businesses</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="city-card">
+      <div class="city-left">
+        <div class="city-icon"><i class="fa fa-city"></i></div>
+        <div>
+          <div class="city-name">York</div>
+          <div class="city-count">240 Businesses</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// SEARCH
+document.getElementById('citySearch').addEventListener('keyup', function(){
+  let value = this.value.toLowerCase();
+  document.querySelectorAll('.city-card').forEach(card=>{
+    let city = card.querySelector('.city-name').innerText.toLowerCase();
+    card.style.display = city.includes(value) ? '' : 'none';
+  });
+});
+
+// ALPHABET FILTER
+document.querySelectorAll('.alphabet button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.alphabet button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    let letter = btn.innerText;
+    document.querySelectorAll('.city-card').forEach(card=>{
+      let city = card.querySelector('.city-name').innerText;
+      card.style.display = (letter === 'All' || city.startsWith(letter)) ? '' : 'none';
+    });
+  });
+});
+</script>
+
+</body>
+</html>

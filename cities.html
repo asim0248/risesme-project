@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- css file -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/ace-responsive-menu.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/fontawesome.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ud-custom-spacing.css">
+    <!-- Responsive stylesheet -->
+    <link rel="stylesheet" href="css/responsive.css">
+    <!-- Title -->
+    <title>Cities | RisesMe</title>
+    <!-- Favicon -->
+    <link href="images/apple-touch-icon-180x180.png" sizes="180x180" rel="shortcut icon" type="image/x-icon">
+
+    <style>
+        /* ===== DESIGN SYSTEM ===== */
+
+        :root {
+            --primary: #1E40AF;
+            --primary-dark: #1E3A8A;
+            --accent: #0EA5E9;
+            --accent-light: #06B6D4;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --bg-light: #F8F9FA;
+            --bg-white: #FFFFFF;
+            --text-dark: #1F2937;
+            --text-muted: #6B7280;
+            --border-light: #E5E7EB;
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 12px 24px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        p {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        /* ===== SEARCH & FILTER SECTION ===== */
+
+        .search-filter-section {
+            background: var(--bg-white);
+            padding: 40px 20px;
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-input-wrapper input {
+            width: 100%;
+            padding: 14px 20px;
+            padding-left: 45px;
+            border: 2px solid var(--border-light);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .search-input-wrapper input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.1);
+            outline: none;
+        }
+
+        .search-input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .filter-tag {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tag:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .filter-tag.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* ===== FEATURED CITIES SECTION ===== */
+
+        .featured-cities-section {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #F8F9FA 0%, #F0F9FF 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .featured-card {
+            background: var(--bg-white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .featured-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+
+        .featured-card-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-card-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .featured-card:hover .featured-card-image::after {
+            left: 100%;
+        }
+
+        .featured-card-content {
+            padding: 25px;
+        }
+
+        .featured-card-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .featured-card-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .featured-card-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .featured-card-meta i {
+            color: var(--accent);
+        }
+
+        .featured-card-description {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .featured-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .featured-card-link {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .featured-card-link:hover {
+            color: var(--accent);
+        }
+
+        .featured-card-badge {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* ===== CITIES GRID SECTION ===== */
+
+        .cities-grid-section {
+            padding: 60px 20px;
+            background: var(--bg-white);
+        }
+
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .city-item {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .city-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .city-item:hover::before {
+            left: 100%;
+        }
+
+        .city-item:hover {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
+        }
+
+        .city-item-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .city-item:hover .city-item-icon {
+            color: var(--accent);
+            transform: scale(1.2);
+        }
+
+        .city-item-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .city-item:hover .city-item-name {
+            color: white;
+        }
+
+        .city-item-count {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .city-item:hover .city-item-count {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* ===== STATS SECTION ===== */
+
+        .stats-section {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .stat-item p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+        }
+
+        /* ===== CATEGORIES SECTION ===== */
+
+        .categories-section {
+            padding: 60px 20px;
+            background: var(--bg-light);
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            background: var(--bg-white);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .category-card h4 {
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .category-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== ALPHABETICAL INDEX ===== */
+
+        .alphabet-index {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            padding: 30px 0;
+            margin-bottom: 40px;
+        }
+
+        .alphabet-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-light);
+            border: 2px solid transparent;
+            color: var(--text-dark);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .alphabet-btn:hover {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            transform: scale(1.15);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ===== RESPONSIVE ===== */
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cities-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 12px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .search-filter-section {
+                padding: 30px 15px;
+            }
+
+            .featured-cities-section,
+            .cities-grid-section,
+            .categories-section {
+                padding: 40px 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            .featured-grid {
+                gap: 15px;
+            }
+
+            .cities-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 10px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-item h3 {
+                font-size: 2rem;
+            }
+
+            .alphabet-index {
+                gap: 6px;
+            }
+
+            .alphabet-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .featured-card {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        .featured-card:nth-child(1) {
+            animation-delay: 0.05s;
+        }
+
+        .featured-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .featured-card:nth-child(3) {
+            animation-delay: 0.15s;
+        }
+
+        .featured-card:nth-child(4) {
+            animation-delay: 0.2s;
+        }
+
+        .featured-card:nth-child(5) {
+            animation-delay: 0.25s;
+        }
+
+        .featured-card:nth-child(6) {
+            animation-delay: 0.3s;
+        }
+
+        .city-item {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper ovh">
+
+    </div>
+    <!-- Main Header Nav -->
+    <header class="header-nav nav-innerpage-style main-menu">
+        <!-- Ace Responsive Menu -->
+        <nav class="posr">
+            <div class="container posr menu_bdrt1">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-auto px-0">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="logos br-white-light pr30 pr5-xl">
+                                <a class="header-logo logo2" href="index.html"><img src="images/logo2.png"
+                                        alt="Header Logo"></a>
+                            </div>
+                            <div class="home1_style">
+                                <div id="mega-menu">
+                                    <a class="btn-mega fw500" href="#"><span
+                                            class="pl30 pl10-xl pr5 fz15 vam flaticon-menu"></span>
+                                        Categories</a>
+                                    <ul class="menu ps-0">
+                                        <li> <a class="dropdown" href="#"> <span class="menu-icn"><img
+                                                        src="images/icons/home-serv.png" alt=""></span> <span
+                                                    class="menu-title">Home Services & Contractors</span> </a>
+                                            <div class="drop-menu d-flex justify-content-between">
+                                                <div class="one-third">
+                                                    <ul>
+                                                        <li><a href="#">Cleaning Services</a></li>
+                                                        <li><a href="#">Pest Control</a></li>
+                                                        <li><a href="#">Landscaping & Gardening</a></li>
+                                                        <li><a href="#">Locksmiths</a></li>
+                                                        <li><a href="#">Handyman Services</a></li>
+                                                        <li><a href="#">Home Security</a></li>
+                                                        <li><a href="#">Waste Removal</a></li>
+                                                        <li><a href="#">Window Cleaning</a></li>
+                                                        <li><a href="#">Removals & Storage</a></li>
+                                                        <li><a href="#">Interior Design</a></li>
+                                                        <li><a href="#">Appliance Repair</a></li>
+                                                        <li><a href="#">Flooring Services</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li> <a class="dropdown" href="#"> <span class="menu-icn"><img
+                                                        src="images/icons/const.png" alt=""></span> <span
+                                                    class="menu-title">Trades & Construction</span> </a>
+                                            <div class="drop-menu d-flex justify-content-between">
+                                                <div class="one-third">
+                                                    <ul>
+                                                        <li><a href="#">Builders & Contractors</a></li>
+                                                        <li><a href="#">Electricians</a></li>
+                                                        <li><a href="#">Plumbers</a></li>
+                                                        <li><a href="#">Roofers</a></li>
+                                                        <li><a href="#">Heating & Gas Engineers</a></li>
+                                                        <li><a href="#">Joiners & Carpenters</a></li>
+                                                        <li><a href="#">Bricklayers</a></li>
+                                                        <li><a href="#">Plasterers</a></li>
+                                                        <li><a href="#">Tilers</a></li>
+                                                        <li><a href="#">Glaziers</a></li>
+                                                        <li><a href="#">Drainage Specialists</a></li>
+                                                        <li><a href="#">Scaffolding Services</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li> <a class="dropdown" href="#"> <span class="menu-icn"><img
+                                                        src="images/icons/health.png" alt=""></span> <span
+                                                    class="menu-title">Health & Wellness</span> </a>
+                                            <div class="drop-menu d-flex justify-content-between">
+                                                <div class="one-third">
+                                                    <ul>
+                                                        <li><a href="#">GP Clinics</a></li>
+                                                        <li><a href="#">Dentists</a></li>
+                                                        <li><a href="#">Opticians</a></li>
+                                                        <li><a href="#">Physiotherapists</a></li>
+                                                        <li><a href="#">Pharmacies</a></li>
+                                                        <li><a href="#">Private Hospitals</a></li>
+                                                        <li><a href="#">Mental Health Services</a></li>
+                                                        <li><a href="#">Nutritionists</a></li>
+                                                        <li><a href="#">Chiropractors</a></li>
+                                                        <li><a href="#">Fitness Centres & Gyms</a></li>
+                                                        <li><a href="#">Massage Therapists</a></li>
+                                                        <li><a href="#">Diagnostic Laboratories</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li> <a class="dropdown" href="#"> <span class="menu-icn"><img
+                                                        src="images/icons/food.png" alt=""></span> <span
+                                                    class="menu-title">Food & Hospitality</span> </a>
+                                            <div class="drop-menu d-flex justify-content-between">
+                                                <div class="one-third">
+                                                    <ul>
+                                                        <li><a href="#">Restaurants</a></li>
+                                                        <li><a href="#">Cafes</a></li>
+                                                        <li><a href="#">Pubs & Bars</a></li>
+                                                        <li><a href="#">Hotels</a></li>
+                                                        <li><a href="#">Catering Services</a></li>
+                                                        <li><a href="#">Bakeries</a></li>
+                                                        <li><a href="#">Food Trucks</a></li>
+                                                        <li><a href="#">Takeaway Shops</a></li>
+                                                        <li><a href="#">Event Venues</a></li>
+                                                        <li><a href="#">Meal Prep Services</a></li>
+                                                        <li><a href="#">Specialty Food Stores</a></li>
+                                                        <li><a href="#">Dessert & Sweet Shops</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li> <a class="dropdown" href="#"> <span class="menu-icn"><img
+                                                        src="images/icons/auto.png" alt=""></span> <span
+                                                    class="menu-title">Automotive & Transport</span> </a>
+                                            <div class="drop-menu d-flex justify-content-between">
+                                                <div class="one-third">
+                                                    <ul>
+                                                        <li><a href="#">Car Dealerships</a></li>
+                                                        <li><a href="#">MOT & Vehicle Testing</a></li>
+                                                        <li><a href="#">Car Repair & Mechanics</a></li>
+                                                        <li><a href="#">Car Wash & Detailing</a></li>
+                                                        <li><a href="#">Car Rental</a></li>
+                                                        <li><a href="#">Taxi Services</a></li>
+                                                        <li><a href="#">Logistics & Couriers</a></li>
+                                                        <li><a href="#">Auto Parts Stores</a></li>
+                                                        <li><a href="#">Breakdown & Recovery</a></li>
+                                                        <li><a href="#">Driving Schools</a></li>
+                                                        <li><a href="#">Tyre Shops</a></li>
+                                                        <li><a href="#">Bike & Scooter Repair</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li> <a class="dropdown" href="#"> <span class="menu-icn"><img
+                                                        src="images/icons/edu.png" alt=""></span> <span
+                                                    class="menu-title">Education & Training</span> </a>
+                                            <div class="drop-menu d-flex justify-content-between">
+                                                <div class="one-third">
+                                                    <ul>
+                                                        <li><a href="#">Schools & Colleges</a></li>
+                                                        <li><a href="#">Universities</a></li>
+                                                        <li><a href="#">Tutors & Private Lessons</a></li>
+                                                        <li><a href="#">Language Centres</a></li>
+                                                        <li><a href="#">Online Courses</a></li>
+                                                        <li><a href="#">Music & Dance Schools</a></li>
+                                                        <li><a href="#">Training Institutes</a></li>
+                                                        <li><a href="#">Vocational Courses</a></li>
+                                                        <li><a href="#">Test Preparation</a></li>
+                                                        <li><a href="#">Skill Development Workshops</a></li>
+                                                        <li><a href="#">Corporate Training</a></li>
+                                                        <li><a href="#">Childcare & Nurseries</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li> <a class="dropdown" href="#"> <span class="menu-icn"><img
+                                                        src="images/icons/bussi.png" alt=""></span> <span
+                                                    class="menu-title">Business & Corporate</span> </a>
+                                            <div class="drop-menu d-flex justify-content-between">
+                                                <div class="one-third">
+                                                    <ul>
+                                                        <li><a href="#">Solicitors</a></li>
+                                                        <li><a href="#">Accountants</a></li>
+                                                        <li><a href="#">Business Consultants</a></li>
+                                                        <li><a href="#">Marketing Agencies</a></li>
+                                                        <li><a href="#">IT Support</a></li>
+                                                        <li><a href="#">Financial Advisors</a></li>
+                                                        <li><a href="#">HR & Recruitment Agencies</a></li>
+                                                        <li><a href="#">Web Developers</a></li>
+                                                        <li><a href="#">Architects</a></li>
+                                                        <li><a href="#">Printing & Signage</a></li>
+                                                        <li><a href="#">Surveyors</a></li>
+                                                        <li><a href="#">Photographers</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li> <a class="dropdown" href="#"> <span class="menu-icn"><img
+                                                        src="images/icons/retail.png" alt=""></span> <span
+                                                    class="menu-title">Shopping & Retail</span> </a>
+                                            <div class="drop-menu d-flex justify-content-between">
+                                                <div class="one-third">
+                                                    <ul>
+                                                        <li><a href="#">Clothing & Fashion Stores</a></li>
+                                                        <li><a href="#">Electronics & Mobile</a></li>
+                                                        <li><a href="#">Furniture & Home Decor</a></li>
+                                                        <li><a href="#">Jewellery Stores</a></li>
+                                                        <li><a href="#">Supermarkets</a></li>
+                                                        <li><a href="#">Beauty & Cosmetic Stores</a></li>
+                                                        <li><a href="#">Hardware & DIY Stores</a></li>
+                                                        <li><a href="#">Toy Shops</a></li>
+                                                        <li><a href="#">Pet Stores</a></li>
+                                                        <li><a href="#">Bookshops</a></li>
+                                                        <li><a href="#">Sports & Fitness Stores</a></li>
+                                                        <li><a href="#">Gift & Craft Shops</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto px-0">
+                        <div class="d-flex align-items-center">
+                            <!-- Responsive Menu Structure-->
+                            <ul id="respMenu" class="ace-responsive-menu" data-menu-style="horizontal">
+                                <li class="visible_list"> <a class="list-item" href="index.html"><span
+                                            class="title">Home</span></a>
+                                    <!-- Level Two-->
+                                </li>
+                                <li class="visible_list"> <a class="list-item" href="about-us.html"><span
+                                            class="title">About
+                                            Us</span></a>
+                                </li>
+                                <li class="visible_list"> <a class="list-item" href="faqs.html"><span
+                                            class="title">Faqs</span></a>
+                                </li>
+                                <li class="visible_list"> <a class="list-item" href="blogs.html"><span
+                                            class="title">Blog</span></a>
+                                </li>
+                                <li class="visible_list"> <a class="list-item" href="contact.html"><span
+                                            class="title">Contact
+                                            Us</span></a>
+                                </li>
+                            </ul>
+                            <a class="login-info mr15-lg mr30 mx30 bdrl1 pl30" href="login.html">Sign in</a>
+                            <div class="dropdown-btn-join">
+                                <button class="ud-btn main-btn">Join Now</button>
+                                <div class="dropdown-menu-join">
+                                    <a href="customer-signup.html"><i class="fa-regular fa-user"></i>As a Customer</a>
+                                    <a href="business-owner-signup.html"><i class="fa-regular fa-user"></i>As a Service
+                                        Provider</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hiddenbar-body-ovelay"></div>
+
+    <!-- Mobile Nav  -->
+    <div id="page" class="mobilie_header_nav stylehome1 inner-mob-nav nav-innerpage-style">
+        <div class="mobile-menu">
+            <div class="header bb-white-light">
+                <div class="menu_and_widgets">
+                    <div class="mobile_menu_bar d-flex justify-content-between align-items-center">
+                        <a class="mobile_logo" href="#"><img src="images/logo2.png" alt=""></a>
+                        <div class="right-side text-end">
+                            <a class="text-white" href="login.html">Sign in</a>
+                            <a class="menubar ml30" href="#menu"><img src="images/white-nav-icon.svg" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="posr">
+                    <div class="mobile_menu_close_btn"><span class="far fa-times"></span></div>
+                </div>
+            </div>
+        </div>
+        <!-- /.mobile-menu -->
+        <nav id="menu" class="">
+            <ul>
+                <li><a href="index.html"><span>Home</span></a>
+                </li>
+                <li><a href="about-us.html"><span>About Us</span></a>
+                </li>
+                <li><a href="#"><span>Categories</span></a>
+                    <ul>
+                        <li>
+                            <span>Home Services & Contractors</span>
+                            <ul>
+                                <li><a href="#">Cleaning Services</a></li>
+                                <li><a href="#">Pest Control</a></li>
+                                <li><a href="#">Landscaping & Gardening</a></li>
+                                <li><a href="#">Locksmiths</a></li>
+                                <li><a href="#">Handyman Services</a></li>
+                                <li><a href="#">Home Security</a></li>
+                                <li><a href="#">Waste Removal</a></li>
+                                <li><a href="#">Window Cleaning</a></li>
+                                <li><a href="#">Removals & Storage</a></li>
+                                <li><a href="#">Interior Design</a></li>
+                                <li><a href="#">Appliance Repair</a></li>
+                                <li><a href="#">Flooring Services</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span>Trades & Construction</span>
+                            <ul>
+                                <li><a href="#">Builders & Contractors</a></li>
+                                <li><a href="#">Electricians</a></li>
+                                <li><a href="#">Plumbers</a></li>
+                                <li><a href="#">Roofers</a></li>
+                                <li><a href="#">Heating & Gas Engineers</a></li>
+                                <li><a href="#">Joiners & Carpenters</a></li>
+                                <li><a href="#">Bricklayers</a></li>
+                                <li><a href="#">Plasterers</a></li>
+                                <li><a href="#">Tilers</a></li>
+                                <li><a href="#">Glaziers</a></li>
+                                <li><a href="#">Drainage Specialists</a></li>
+                                <li><a href="#">Scaffolding Services</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span>Health & Wellness</span>
+                            <ul>
+                                <li><a href="#">GP Clinics</a></li>
+                                <li><a href="#">Dentists</a></li>
+                                <li><a href="#">Opticians</a></li>
+                                <li><a href="#">Physiotherapists</a></li>
+                                <li><a href="#">Pharmacies</a></li>
+                                <li><a href="#">Private Hospitals</a></li>
+                                <li><a href="#">Mental Health Services</a></li>
+                                <li><a href="#">Nutritionists</a></li>
+                                <li><a href="#">Chiropractors</a></li>
+                                <li><a href="#">Fitness Centres & Gyms</a></li>
+                                <li><a href="#">Massage Therapists</a></li>
+                                <li><a href="#">Diagnostic Laboratories</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span>Food & Hospitality</span>
+                            <ul>
+                                <li><a href="#">Restaurants</a></li>
+                                <li><a href="#">Cafes</a></li>
+                                <li><a href="#">Pubs & Bars</a></li>
+                                <li><a href="#">Hotels</a></li>
+                                <li><a href="#">Catering Services</a></li>
+                                <li><a href="#">Bakeries</a></li>
+                                <li><a href="#">Food Trucks</a></li>
+                                <li><a href="#">Takeaway Shops</a></li>
+                                <li><a href="#">Event Venues</a></li>
+                                <li><a href="#">Meal Prep Services</a></li>
+                                <li><a href="#">Specialty Food Stores</a></li>
+                                <li><a href="#">Dessert & Sweet Shops</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span>Automotive & Transport</span>
+                            <ul>
+                                <li><a href="#">Car Dealerships</a></li>
+                                <li><a href="#">MOT & Vehicle Testing</a></li>
+                                <li><a href="#">Car Repair & Mechanics</a></li>
+                                <li><a href="#">Car Wash & Detailing</a></li>
+                                <li><a href="#">Car Rental</a></li>
+                                <li><a href="#">Taxi Services</a></li>
+                                <li><a href="#">Logistics & Couriers</a></li>
+                                <li><a href="#">Auto Parts Stores</a></li>
+                                <li><a href="#">Breakdown & Recovery</a></li>
+                                <li><a href="#">Driving Schools</a></li>
+                                <li><a href="#">Tyre Shops</a></li>
+                                <li><a href="#">Bike & Scooter Repair</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span>Education & Training</span>
+                            <ul>
+                                <li><a href="#">Schools & Colleges</a></li>
+                                <li><a href="#">Universities</a></li>
+                                <li><a href="#">Tutors & Private Lessons</a></li>
+                                <li><a href="#">Language Centres</a></li>
+                                <li><a href="#">Online Courses</a></li>
+                                <li><a href="#">Music & Dance Schools</a></li>
+                                <li><a href="#">Training Institutes</a></li>
+                                <li><a href="#">Vocational Courses</a></li>
+                                <li><a href="#">Test Preparation</a></li>
+                                <li><a href="#">Skill Development Workshops</a></li>
+                                <li><a href="#">Corporate Training</a></li>
+                                <li><a href="#">Childcare & Nurseries</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span>Business & Corporate</span>
+                            <ul>
+                                <li><a href="#">Solicitors</a></li>
+                                <li><a href="#">Accountants</a></li>
+                                <li><a href="#">Business Consultants</a></li>
+                                <li><a href="#">Marketing Agencies</a></li>
+                                <li><a href="#">IT Support</a></li>
+                                <li><a href="#">Financial Advisors</a></li>
+                                <li><a href="#">HR & Recruitment Agencies</a></li>
+                                <li><a href="#">Web Developers</a></li>
+                                <li><a href="#">Architects</a></li>
+                                <li><a href="#">Printing & Signage</a></li>
+                                <li><a href="#">Surveyors</a></li>
+                                <li><a href="#">Photographers</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span>Shopping & Retail</span>
+                            <ul>
+                                <li><a href="#">Clothing & Fashion Stores</a></li>
+                                <li><a href="#">Electronics & Mobile</a></li>
+                                <li><a href="#">Furniture & Home Decor</a></li>
+                                <li><a href="#">Jewellery Stores</a></li>
+                                <li><a href="#">Supermarkets</a></li>
+                                <li><a href="#">Beauty & Cosmetic Stores</a></li>
+                                <li><a href="#">Hardware & DIY Stores</a></li>
+                                <li><a href="#">Toy Shops</a></li>
+                                <li><a href="#">Pet Stores</a></li>
+                                <li><a href="#">Bookshops</a></li>
+                                <li><a href="#">Sports & Fitness Stores</a></li>
+                                <li><a href="#">Gift & Craft Shops</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="blogs.html"><span>Blog</span></a>
+                </li>
+                <li><a href="contact.html"><span>Contact Us</span></a>
+                </li>
+                <li><a href="business-owner-signup.html"><span>Sign Up</span></a></li>
+
+                <!-- Only for Mobile View -->
+            </ul>
+
+        </nav>
+    </div>
+
+    <!-- SEARCH & FILTER SECTION -->
+    <div class="search-filter-section">
+        <div class="container">
+            <h1 style="margin-bottom: 30px; text-align: center;">Discover UK Cities</h1>
+
+            <div class="search-input-wrapper">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search cities by name or postcode...">
+            </div>
+
+            <div class="filter-tags">
+                <span class="filter-tag active">All Cities</span>
+                <span class="filter-tag">Major Cities</span>
+                <span class="filter-tag">Coastal Towns</span>
+                <span class="filter-tag">Historic Cities</span>
+                <span class="filter-tag">University Towns</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Breadcumb Sections -->
+    <section class="breadcumb-section pt-0">
+        <div class="cta-about-v1 mx-auto pt120 pb120 position-relative overflow-hidden d-flex align-items-center"
+            style="background-image: url('images/background/about-us-bg.jpg');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-8">
+                        <div class="position-relative">
+                            <h1 class="text-white">Discover UK Cities</h1>
+                            <div class="advance-search-tab bgc-white p10 bdrs4-sm banner-btn position-relative zi9 ">
+                                <div class="row">
+                                    <div class="col-md-5 col-lg-6 col-xl-6">
+                                        <div class="advance-search-field mb10-sm">
+                                            <form class="form-search position-relative">
+                                                <div class="box-search">
+                                                    <span class="icon far fa-magnifying-glass"></span>
+                                                    <input class="form-control" type="text" name="search"
+                                                        placeholder="What are you looking for?"
+                                                        style="background: transparent;">
+                                                    <div class="search-suggestions">
+                                                        <h6 class="fz14 ml30 mt25 mb-3">Popular Search</h6>
+                                                        <div class="box-suggestions">
+                                                            <ul class="px-0 m-0 pb-4">
+                                                                <li>
+                                                                    <div class="info-product">
+                                                                        <div class="item_title">mobile app development
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="info-product">
+                                                                        <div class="item_title">mobile app builder</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="info-product">
+                                                                        <div class="item_title">mobile legends</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="info-product">
+                                                                        <div class="item_title">mobile app ui ux design
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="info-product">
+                                                                        <div class="item_title">mobile game app
+                                                                            development</div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="info-product">
+                                                                        <div class="item_title">mobile app design</div>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-lg-4 col-xl-3">
+                                        <div class="bselect-style1 bdrl1 bdrn-sm">
+                                            <select class="selectpicker" data-width="100%">
+                                                <option>Select City</option>
+                                                <option data-tokens="Miami">London
+                                                </option>
+                                                <option data-tokens="NewYork">Manchester</option>
+                                                <option value="">
+                                                    Birmingham
+                                                </option>
+                                                <option value="">Liverpool</option>
+                                                <option value="">Leeds</option>
+                                                <option value="">Glasgow</option>
+                                                <option value="">Edinburgh</option>
+                                                <option value="">Sheffield</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-lg-2 col-xl-3">
+                                        <div class="text-center text-xl-start">
+                                            <button class="ud-btn btn-dark bdrs4-sm w-100" type="button">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED CITIES SECTION -->
+    <div class="featured-cities-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Cities</h2>
+                <p>Explore our most popular destinations with thriving business communities</p>
+            </div>
+
+            <div class="featured-grid">
+                <!-- London -->
+                <div class="featured-card">
+                    <div class="featured-card-image">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="featured-card-content">
+                        <h3 class="featured-card-title">London</h3>
+                        <div class="featured-card-meta">
+                            <span><i class="fas fa-briefcase"></i> 5,800 Businesses</span>
+                            <span><i class="fas fa-users"></i> 9M+ Population</span>
+                        </div>
+                        <p class="featured-card-description">The capital city with the largest business ecosystem in the
+                            UK.
+                            Finance, tech, and creative industries thrive here.</p>
+                        <div class="featured-card-footer">
+                            <a href="#" class="featured-card-link">Explore <i class="fas fa-arrow-right"></i></a>
+                            <span class="featured-card-badge">Top Rated</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manchester -->
+                <div class="featured-card">
+                    <div class="featured-card-image">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <div class="featured-card-content">
+                        <h3 class="featured-card-title">Manchester</h3>
+                        <div class="featured-card-meta">
+                            <span><i class="fas fa-briefcase"></i> 2,100 Businesses</span>
+                            <span><i class="fas fa-users"></i> 547K Population</span>
+                        </div>
+                        <p class="featured-card-description">A vibrant hub for manufacturing, media, and technology.
+                            Strong business
+                            growth and innovation ecosystem.</p>
+                        <div class="featured-card-footer">
+                            <a href="#" class="featured-card-link">Explore <i class="fas fa-arrow-right"></i></a>
+                            <span class="featured-card-badge">Growing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Birmingham -->
+                <div class="featured-card">
+                    <div class="featured-card-image">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <div class="featured-card-content">
+                        <h3 class="featured-card-title">Birmingham</h3>
+                        <div class="featured-card-meta">
+                            <span><i class="fas fa-briefcase"></i> 1,250 Businesses</span>
+                            <span><i class="fas fa-users"></i> 1.1M Population</span>
+                        </div>
+                        <p class="featured-card-description">England's second-largest city with diverse industries
+                            including
+                            manufacturing, retail, and professional services.</p>
+                        <div class="featured-card-footer">
+                            <a href="#" class="featured-card-link">Explore <i class="fas fa-arrow-right"></i></a>
+                            <span class="featured-card-badge">Popular</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- CITIES GRID SECTION -->
+    <div class="cities-grid-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Browse All Cities</h2>
+                <p>Find businesses and services in your city</p>
+            </div>
+
+            <!-- Alphabetical Index -->
+            <div class="alphabet-index">
+                <button class="alphabet-btn">A</button>
+                <button class="alphabet-btn">B</button>
+                <button class="alphabet-btn">C</button>
+                <button class="alphabet-btn">D</button>
+                <button class="alphabet-btn">E</button>
+                <button class="alphabet-btn">F</button>
+                <button class="alphabet-btn">G</button>
+                <button class="alphabet-btn">H</button>
+                <button class="alphabet-btn">I</button>
+                <button class="alphabet-btn">L</button>
+                <button class="alphabet-btn">M</button>
+                <button class="alphabet-btn">N</button>
+                <button class="alphabet-btn">O</button>
+                <button class="alphabet-btn">P</button>
+                <button class="alphabet-btn">S</button>
+                <button class="alphabet-btn">T</button>
+                <button class="alphabet-btn">W</button>
+                <button class="alphabet-btn">Y</button>
+            </div>
+
+            <!-- Cities Grid -->
+            <div class="cities-grid">
+                <!-- A Cities -->
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Aberdeen</div>
+                    <div class="city-item-count">320 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Abingdon</div>
+                    <div class="city-item-count">48 Businesses</div>
+                </div>
+
+                <!-- B Cities -->
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Bath</div>
+                    <div class="city-item-count">145 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Belfast</div>
+                    <div class="city-item-count">410 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Birmingham</div>
+                    <div class="city-item-count">1,250 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Bristol</div>
+                    <div class="city-item-count">690 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Bradford</div>
+                    <div class="city-item-count">380 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Brighton</div>
+                    <div class="city-item-count">520 Businesses</div>
+                </div>
+
+                <!-- C Cities -->
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Cambridge</div>
+                    <div class="city-item-count">280 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Cardiff</div>
+                    <div class="city-item-count">420 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Coventry</div>
+                    <div class="city-item-count">350 Businesses</div>
+                </div>
+
+                <!-- D Cities -->
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Derby</div>
+                    <div class="city-item-count">290 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Doncaster</div>
+                    <div class="city-item-count">210 Businesses</div>
+                </div>
+
+                <!-- E Cities -->
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Edinburgh</div>
+                    <div class="city-item-count">580 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Exeter</div>
+                    <div class="city-item-count">240 Businesses</div>
+                </div>
+
+                <!-- L Cities -->
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Leeds</div>
+                    <div class="city-item-count">520 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Leicester</div>
+                    <div class="city-item-count">380 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Liverpool</div>
+                    <div class="city-item-count">610 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">London</div>
+                    <div class="city-item-count">5,800 Businesses</div>
+                </div>
+
+                <!-- M Cities -->
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Manchester</div>
+                    <div class="city-item-count">2,100 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Milton Keynes</div>
+                    <div class="city-item-count">420 Businesses</div>
+                </div>
+
+                <!-- N Cities -->
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Newcastle</div>
+                    <div class="city-item-count">480 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Nottingham</div>
+                    <div class="city-item-count">390 Businesses</div>
+                </div>
+
+                <!-- O Cities -->
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Oxford</div>
+                    <div class="city-item-count">310 Businesses</div>
+                </div>
+
+                <!-- S Cities -->
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Sheffield</div>
+                    <div class="city-item-count">520 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Southampton</div>
+                    <div class="city-item-count">280 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Stoke-on-Trent</div>
+                    <div class="city-item-count">220 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Swansea</div>
+                    <div class="city-item-count">310 Businesses</div>
+                </div>
+
+                <!-- W Cities -->
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Wolverhampton</div>
+                    <div class="city-item-count">290 Businesses</div>
+                </div>
+
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">Worcester</div>
+                    <div class="city-item-count">180 Businesses</div>
+                </div>
+
+                <!-- Y Cities -->
+                <div class="city-item">
+                    <div class="city-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="city-item-name">York</div>
+                    <div class="city-item-count">240 Businesses</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CATEGORIES SECTION -->
+    <div class="categories-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Browse by Category</h2>
+                <p>Find businesses by industry and service type</p>
+            </div>
+
+            <div class="categories-grid">
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-wrench"></i></div>
+                    <h4>Home Services</h4>
+                    <p>Plumbers, electricians, carpenters, and more</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-utensils"></i></div>
+                    <h4>Restaurants & Cafes</h4>
+                    <p>Dining, takeaway, and catering services</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-briefcase"></i></div>
+                    <h4>Professional Services</h4>
+                    <p>Accountants, lawyers, consultants</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-heartbeat"></i></div>
+                    <h4>Health & Wellness</h4>
+                    <p>Doctors, dentists, fitness centers</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-laptop"></i></div>
+                    <h4>Digital & Tech</h4>
+                    <p>Web design, IT support, digital marketing</p>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon"><i class="fas fa-shopping-bag"></i></div>
+                    <h4>Retail & Shopping</h4>
+                    <p>Shops, boutiques, and shopping centers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Our Footer -->
+    <section class="footer-style1 bgc-thm4  pt60 pb-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-lg-4">
+                    <div class="link-style1 mb-4 mb-sm-5">
+                        <img src="images/logo2.png" alt="">
+                        <p>
+                            Risesme connects people with trusted businesses, skilled professionals, and reliable
+                            services across
+                            the UK. Our mission is to make finding, connecting, and growing easier — all through one
+                            powerful
+                            platform built for visibility and trust.
+                        </p>
+                        <div class="social-widget">
+                            <div class="social-style1">
+                                <a href="#"><i class="fab fa-facebook-f list-inline-item"></i></a>
+                                <a href="#"><i class="fab fa-twitter list-inline-item"></i></a>
+                                <a href="#"><i class="fab fa-instagram list-inline-item"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in list-inline-item"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                    <div class="link-style1 mb-4 mb-sm-5">
+                        <h5 class="text-white mb15">Quick Links</h5>
+                        <div class="link-list">
+                            <a href="index.html">Home</a>
+                            <a href="about-us.html">About Us</a>
+                            <a href="#">Categories</a>
+                            <a href="blogs.html">Blog</a>
+                            <a href="contact.html">Contact Us</a>
+                            <a href="business-owner-signup.html">Sign up</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="link-style1 mb-4 mb-sm-5">
+                        <h5 class="text-white mb15">Support</h5>
+                        <ul class="ps-0">
+                            <li><a href="#">Help & Support</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="faqs.html">Faq's</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="footer-widget">
+                        <div class="footer-widget mb-4 mb-sm-5">
+                            <div class="mailchimp-widget">
+                                <h5 class="title text-white mb20">Conatct Info</h5>
+                            </div>
+                            <div class="row mb-4 mb-lg-5">
+                                <div class="col-auto">
+                                    <div class="contact-info">
+                                        <p class="info-title mb-2">Email Us:</p>
+                                        <h5 class="info-mail"><a class=""
+                                                href="mailto:info@risesme.com">info@risesme.com</a></h5>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="contact-info">
+                                        <p class="info-title mb-2 mt-2">Location:</p>
+                                        <h5 class="info-phone"><a class="" href="#">London, UK</a></h5>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container white-bdrt1 py-4">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="text-center">
+                        <p class="copyright-text mb-2 mb-md-0 ff-heading">© RisesMe 2025. All
+                            rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <a class="scrollToHome" href="#"><i class="fas fa-angle-up"></i></a>
+
+    <!-- Bootstrap JS -->
+    <!-- Wrapper End -->
+    <script src="js/jquery-3.6.4.min.js"></script>
+    <script src="js/jquery-migrate-3.0.0.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-select.min.js"></script>
+    <script src="js/jquery.mmenu.all.js"></script>
+    <script src="js/ace-responsive-menu.js"></script>
+    <script src="js/jquery-scrolltofixed-min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/owl.js"></script>
+    <script src="js/pricing-table.js"></script>
+    <!-- Custom script for all pages -->
+    <script src="js/script.js"></script>
+
+    <script>
+        // Simple search functionality
+        document.querySelector('.search-input-wrapper input').addEventListener('keyup', function (e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const cityItems = document.querySelectorAll('.city-item');
+
+            cityItems.forEach(item => {
+                const cityName = item.querySelector('.city-item-name').textContent.toLowerCase();
+                if (cityName.includes(searchTerm)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Filter tags functionality
+        document.querySelectorAll('.filter-tag').forEach(tag => {
+            tag.addEventListener('click', function () {
+                document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Alphabet index functionality
+        document.querySelectorAll('.alphabet-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const letter = this.textContent;
+                const cityItems = document.querySelectorAll('.city-item');
+
+                cityItems.forEach(item => {
+                    const cityName = item.querySelector('.city-item-name').textContent;
+                    if (cityName.charAt(0).toUpperCase() === letter) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

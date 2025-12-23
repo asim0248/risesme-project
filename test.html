@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .custom_checkbox {
+            display: block;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .checkmark {
+            margin-left: 5px;
+        }
+
+        #showMoreBtn {
+            display: block;
+            margin-top: 10px;
+            cursor: pointer;
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search-wrapper">
+        <input type="text" id="categorySearch" placeholder="Enter Category Name">
+
+        <div id="categoryList">
+            <div class="custom_checkbox">Mental Wellness & Meditation
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                            <span class="right-tags">(1,945)</span>
+
+            </div>
+            <div class="custom_checkbox">Weight Management
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                            <span class="right-tags">(1,945)</span>
+
+            </div>
+            <div class="custom_checkbox">Fitness & Yoga
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="right-tags">(240)</span>
+                            <span class="right-tags">(1,945)</span>
+
+            </div>
+
+            <div class="custom_checkbox">Massage Therapy
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="right-tags">(2,460)</span>
+            </div>
+
+            <div class="custom_checkbox">Spa & Relaxation
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="right-tags">(2,460)</span>
+            </div>
+            <div class="custom_checkbox">Personal Grooming
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="right-tags">(2,460)</span>
+            </div>
+            <div class="custom_checkbox">Makeup & Cosmetics
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="right-tags">(2,460)</span>
+            </div>
+            <div class="custom_checkbox">Haircare
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="right-tags">(2,460)</span>
+            </div>
+
+            <div class="custom_checkbox">Skincare
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="right-tags">(2,460)</span>
+            </div>
+            <!-- more categories -->
+        </div>
+
+        <a href="javascript:void(0)" id="showMoreBtn">Show More</a>
+    </div>
+
+        <div class="search-wrapper">
+        <input type="text" id="locationSearch" placeholder="Enter Category Name">
+
+        <div id="locationList">
+            <div class="custom_checkbox">Mental Wellness & Meditation
+                <input type="checkbox">
+                <span class="checkmark"></span>
+            </div>
+            <div class="custom_checkbox">Weight Management
+                <input type="checkbox">
+                <span class="checkmark"></span>
+            </div>
+            <div class="custom_checkbox">Fitness & Yoga
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="right-tags">(240)</span>
+            </div>
+
+            <div class="custom_checkbox">Massage Therapy
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="right-tags">(2,460)</span>
+            </div>
+
+            <div class="custom_checkbox">Spa & Relaxation
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="right-tags">(2,460)</span>
+            </div>
+            <div class="custom_checkbox">Personal Grooming
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="right-tags">(2,460)</span>
+            </div>
+            <div class="custom_checkbox">Makeup & Cosmetics
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="right-tags">(2,460)</span>
+            </div>
+            <div class="custom_checkbox">Haircare
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="right-tags">(2,460)</span>
+            </div>
+
+            <div class="custom_checkbox">Skincare
+                <input type="checkbox">
+                <span class="checkmark"></span>
+                <span class="right-tags">(2,460)</span>
+            </div>
+            <!-- more categories -->
+        </div>
+
+        <a href="javascript:void(0)" id="locshowMoreBtn">Show More</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const categoryList = document.getElementById("categoryList");
+            const showMoreBtn = document.getElementById("showMoreBtn");
+            const searchInput = document.getElementById("categorySearch");
+
+            let initialLimit = 5; // Number of items shown initially
+            let expanded = false;  // Tracks show more/less state
+
+            function updateVisibility() {
+                const labels = Array.from(categoryList.querySelectorAll(".custom_checkbox"));
+                const searchValue = searchInput.value.toLowerCase().trim();
+                let visibleCount = 0;
+
+                labels.forEach(label => {
+                    const text = label.textContent.toLowerCase();
+                    const matches = text.includes(searchValue);
+
+                    // Hide non-matching items
+                    if (!matches) {
+                        label.style.display = "none";
+                        return;
+                    }
+
+                    // If searching, show all matches
+                    if (searchValue) {
+                        label.style.display = "block";
+                    } else {
+                        // No search: apply Show More / Less
+                        if (!expanded && visibleCount >= initialLimit) {
+                            label.style.display = "none";
+                        } else {
+                            label.style.display = "block";
+                        }
+                    }
+
+                    if (matches) visibleCount++;
+                });
+
+                // Show / Hide Show More button
+                if (searchValue) {
+                    showMoreBtn.style.display = "none"; // hide button during search
+                } else {
+                    const hiddenExists = labels.some(label => label.style.display === "none");
+                    showMoreBtn.style.display = hiddenExists ? "inline-block" : "none";
+                    showMoreBtn.textContent = expanded ? "Show Less" : "Show More";
+                }
+            }
+
+            // Live search
+            searchInput.addEventListener("keyup", function () {
+                expanded = false; // reset Show More when search starts
+                updateVisibility();
+            });
+
+            // Show More / Show Less
+            showMoreBtn.addEventListener("click", function () {
+                expanded = !expanded;
+                updateVisibility();
+            });
+
+            // Initial call
+            updateVisibility();
+        });
+
+    </script>
+
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const categoryList = document.getElementById("locationList");
+            const showMoreBtn = document.getElementById("locshowMoreBtn");
+            const searchInput = document.getElementById("locationSearch");
+
+            let initialLimit = 5; // Number of items shown initially
+            let expanded = false;  // Tracks show more/less state
+
+            function updateVisibility() {
+                const labels = Array.from(categoryList.querySelectorAll(".custom_checkbox"));
+                const searchValue = searchInput.value.toLowerCase().trim();
+                let visibleCount = 0;
+
+                labels.forEach(label => {
+                    const text = label.textContent.toLowerCase();
+                    const matches = text.includes(searchValue);
+
+                    // Hide non-matching items
+                    if (!matches) {
+                        label.style.display = "none";
+                        return;
+                    }
+
+                    // If searching, show all matches
+                    if (searchValue) {
+                        label.style.display = "block";
+                    } else {
+                        // No search: apply Show More / Less
+                        if (!expanded && visibleCount >= initialLimit) {
+                            label.style.display = "none";
+                        } else {
+                            label.style.display = "block";
+                        }
+                    }
+
+                    if (matches) visibleCount++;
+                });
+
+                // Show / Hide Show More button
+                if (searchValue) {
+                    showMoreBtn.style.display = "none"; // hide button during search
+                } else {
+                    const hiddenExists = labels.some(label => label.style.display === "none");
+                    showMoreBtn.style.display = hiddenExists ? "inline-block" : "none";
+                    showMoreBtn.textContent = expanded ? "Show Less" : "Show More";
+                }
+            }
+
+            // Live search
+            searchInput.addEventListener("keyup", function () {
+                expanded = false; // reset Show More when search starts
+                updateVisibility();
+            });
+
+            // Show More / Show Less
+            showMoreBtn.addEventListener("click", function () {
+                expanded = !expanded;
+                updateVisibility();
+            });
+
+            // Initial call
+            updateVisibility();
+        });
+
+    </script>
+
+</body>
+
+</html>

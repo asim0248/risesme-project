@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>UK Cities Directory | RisesMe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: #ffffff;
+      color: #1f2937;
+      font-size: 15px;
+    }
+
+    .page-header {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 40px 0 25px;
+    }
+
+    .page-header h1 {
+      font-size: 32px;
+      font-weight: 600;
+    }
+
+    .page-header p {
+      max-width: 900px;
+      color: #4b5563;
+      margin-top: 10px;
+    }
+
+    .search-inline {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 15px;
+    }
+
+    .search-inline input {
+      border: none;
+      outline: none;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .popular-cities a {
+      display: inline-block;
+      margin: 6px 10px 6px 0;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #f3f4f6;
+      text-decoration: none;
+      color: #1f2937;
+      font-weight: 500;
+    }
+
+    .popular-cities a:hover {
+      background: #2563eb;
+      color: #ffffff;
+    }
+
+    .city-list {
+      column-count: 4;
+      column-gap: 40px;
+    }
+
+    .city-list a {
+      display: block;
+      padding: 6px 0;
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .city-list a:hover {
+      text-decoration: underline;
+    }
+
+    .info-box {
+      background: #f9fafb;
+      border-left: 4px solid #2563eb;
+      padding: 20px;
+      border-radius: 6px;
+    }
+
+    @media (max-width: 992px) {
+      .city-list {
+        column-count: 2;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .city-list {
+        column-count: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <h1>UK Cities Business Directory</h1>
+    <p>
+      Browse businesses by city across the United Kingdom. Each city page on RisesMe
+      provides verified business listings, contact details, and local services tailored
+      to your area.
+    </p>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="my-4 search-inline">
+    <div class="row align-items-center">
+      <div class="col-md-8 mb-2 mb-md-0">
+        <div class="input-group">
+          <span class="input-group-text bg-transparent border-0">
+            <i class="fa fa-location-dot"></i>
+          </span>
+          <input type="text" class="form-control border-0" placeholder="Search by city or postcode">
+        </div>
+      </div>
+      <div class="col-md-4 text-md-end">
+        <button class="btn btn-primary px-4">Search</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- POPULAR -->
+  <section class="mb-5">
+    <div class="section-title">Popular Cities</div>
+    <div class="popular-cities">
+      <a href="/london">London</a>
+      <a href="/manchester">Manchester</a>
+      <a href="/birmingham">Birmingham</a>
+      <a href="/leeds">Leeds</a>
+      <a href="/liverpool">Liverpool</a>
+      <a href="/bristol">Bristol</a>
+      <a href="/sheffield">Sheffield</a>
+      <a href="/nottingham">Nottingham</a>
+    </div>
+  </section>
+
+  <!-- ALL CITIES -->
+  <section class="mb-5">
+    <div class="section-title">All Cities</div>
+    <div class="city-list">
+      <a href="/aberdeen">Aberdeen</a>
+      <a href="/bath">Bath</a>
+      <a href="/belfast">Belfast</a>
+      <a href="/birmingham">Birmingham</a>
+      <a href="/bradford">Bradford</a>
+      <a href="/brighton">Brighton</a>
+      <a href="/bristol">Bristol</a>
+      <a href="/cambridge">Cambridge</a>
+      <a href="/cardiff">Cardiff</a>
+      <a href="/coventry">Coventry</a>
+      <a href="/derby">Derby</a>
+      <a href="/edinburgh">Edinburgh</a>
+      <a href="/glasgow">Glasgow</a>
+      <a href="/leeds">Leeds</a>
+      <a href="/leicester">Leicester</a>
+      <a href="/liverpool">Liverpool</a>
+      <a href="/london">London</a>
+      <a href="/manchester">Manchester</a>
+      <a href="/milton-keynes">Milton Keynes</a>
+      <a href="/newcastle">Newcastle</a>
+      <a href="/nottingham">Nottingham</a>
+      <a href="/oxford">Oxford</a>
+      <a href="/reading">Reading</a>
+      <a href="/sheffield">Sheffield</a>
+      <a href="/southampton">Southampton</a>
+      <a href="/wolverhampton">Wolverhampton</a>
+    </div>
+  </section>
+
+  <!-- INFO -->
+  <section class="mb-5">
+    <div class="info-box">
+      <p class="mb-0">
+        <strong>Tip:</strong> You can also search using UK postcodes (e.g. SW1A, E14)
+        to find businesses near a specific location.
+      </p>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

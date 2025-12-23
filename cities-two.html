@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>UK Cities Business Directory | RisesMe</title>
+<meta name="description" content="Browse businesses by UK cities from A to Z. Find trusted local services across London, Manchester, Birmingham, Leeds and more on RisesMe.">
+
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+<style>
+/* Base */
+body {
+  background: #f4f6f8;
+  color: #1f2937;
+  font-size: 15px;
+}
+a { text-decoration: none; transition: 0.25s; }
+
+/* Header */
+.page-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 60px 20px 40px;
+  text-align: center;
+}
+.page-header h1 {
+  font-size: 38px;
+  font-weight: 700;
+}
+.page-header p {
+  max-width: 900px;
+  margin: 12px auto 0;
+  color: #4b5563;
+}
+
+/* Search */
+.search-box {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 18px;
+  margin: 35px auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,.06);
+}
+.search-box input {
+  border: none;
+  outline: none;
+}
+
+/* A–Z Navigation */
+.az-nav {
+  background: #ffffff;
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 35px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.05);
+  text-align: center;
+}
+.az-nav a {
+  display: inline-block;
+  margin: 6px;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  color: #1f2937;
+  font-weight: 600;
+}
+.az-nav a:hover {
+  background: #2563eb;
+  color: #fff;
+}
+
+/* Popular Cities */
+.popular-cities {
+  text-align: center;
+  margin-bottom: 45px;
+}
+.popular-cities a {
+  display: inline-block;
+  margin: 8px;
+  padding: 10px 18px;
+  background: #ffffff;
+  border-radius: 999px;
+  color: #2563eb;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0,0,0,.06);
+}
+.popular-cities a:hover {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+/* Letter Section */
+.letter-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #111827;
+}
+
+/* City Grid */
+.city-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 16px;
+  margin-bottom: 50px;
+}
+
+/* City Card */
+.city-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 18px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #2563eb;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(0,0,0,.06);
+}
+.city-card span {
+  background: #eef2ff;
+  color: #1e3a8a;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+.city-card:hover {
+  background: #2563eb;
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+.city-card:hover span {
+  background: #ffffff;
+  color: #2563eb;
+}
+
+/* Info Box */
+.info-box {
+  background: #ffffff;
+  border-left: 5px solid #2563eb;
+  padding: 22px;
+  border-radius: 10px;
+  margin-bottom: 70px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="page-header">
+  <h1>UK Cities Business Directory</h1>
+  <p>Explore businesses across the United Kingdom by city. Each city page on RisesMe features verified local services, reviews, and contact details.</p>
+</div>
+
+<div class="container">
+
+  <!-- SEARCH -->
+  <div class="search-box">
+    <div class="row align-items-center">
+      <div class="col-md-9 mb-2 mb-md-0">
+        <div class="input-group">
+          <span class="input-group-text bg-transparent border-0">
+            <i class="fa-solid fa-location-dot"></i>
+          </span>
+          <input type="text" class="form-control" placeholder="Search city or UK postcode (e.g. London, SW1A)">
+        </div>
+      </div>
+      <div class="col-md-3 text-end">
+        <button class="btn btn-primary w-100">Search</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- A–Z NAV -->
+  <div class="az-nav">
+    <a href="#A">A</a><a href="#B">B</a><a href="#C">C</a><a href="#D">D</a>
+    <a href="#E">E</a><a href="#F">F</a><a href="#G">G</a><a href="#H">H</a>
+    <a href="#L">L</a><a href="#M">M</a><a href="#N">N</a><a href="#O">O</a>
+    <a href="#P">P</a><a href="#R">R</a><a href="#S">S</a><a href="#W">W</a>
+    <a href="#Y">Y</a>
+  </div>
+
+  <!-- POPULAR -->
+  <div class="popular-cities">
+    <a href="#">London</a>
+    <a href="#">Manchester</a>
+    <a href="#">Birmingham</a>
+    <a href="#">Leeds</a>
+    <a href="#">Liverpool</a>
+    <a href="#">Bristol</a>
+    <a href="#">Nottingham</a>
+  </div>
+
+  <!-- CITIES A–Z (30+) -->
+
+  <div id="A">
+    <div class="letter-title">A</div>
+    <div class="city-grid">
+      <a class="city-card" href="#">Aberdeen <span>320</span></a>
+      <a class="city-card" href="#">Abingdon <span>48</span></a>
+    </div>
+  </div>
+
+  <div id="B">
+    <div class="letter-title">B</div>
+    <div class="city-grid">
+      <a class="city-card" href="#">Bath <span>145</span></a>
+      <a class="city-card" href="#">Belfast <span>410</span></a>
+      <a class="city-card" href="#">Birmingham <span>1,250</span></a>
+      <a class="city-card" href="#">Bradford <span>390</span></a>
+      <a class="city-card" href="#">Bristol <span>690</span></a>
+    </div>
+  </div>
+
+  <div id="C">
+    <div class="letter-title">C</div>
+    <div class="city-grid">
+      <a class="city-card" href="#">Cambridge <span>310</span></a>
+      <a class="city-card" href="#">Canterbury <span>180</span></a>
+      <a class="city-card" href="#">Cardiff <span>420</span></a>
+      <a class="city-card" href="#">Coventry <span>360</span></a>
+    </div>
+  </div>
+
+  <div id="D">
+    <div class="letter-title">D</div>
+    <div class="city-grid">
+      <a class="city-card" href="#">Derby <span>270</span></a>
+      <a class="city-card" href="#">Doncaster <span>210</span></a>
+      <a class="city-card" href="#">Dundee <span>190</span></a>
+    </div>
+  </div>
+
+  <div id="E">
+    <div class="letter-title">E</div>
+    <div class="city-grid">
+      <a class="city-card" href="#">Edinburgh <span>520</span></a>
+      <a class="city-card" href="#">Exeter <span>160</span></a>
+    </div>
+  </div>
+
+  <div id="L">
+    <div class="letter-title">L</div>
+    <div class="city-grid">
+      <a class="city-card" href="#">Leeds <span>520</span></a>
+      <a class="city-card" href="#">Leicester <span>430</span></a>
+      <a class="city-card" href="#">Liverpool <span>610</span></a>
+      <a class="city-card" href="#">London <span>5,800</span></a>
+    </div>
+  </div>
+
+  <div id="M">
+    <div class="letter-title">M</div>
+    <div class="city-grid">
+      <a class="city-card" href="#">Manchester <span>1,120</span></a>
+      <a class="city-card" href="#">Milton Keynes <span>220</span></a>
+      <a class="city-card" href="#">Middlesbrough <span>190</span></a>
+    </div>
+  </div>
+
+  <div id="N">
+    <div class="letter-title">N</div>
+    <div class="city-grid">
+      <a class="city-card" href="#">Newcastle <span>340</span></a>
+      <a class="city-card" href="#">Northampton <span>210</span></a>
+      <a class="city-card" href="#">Nottingham <span>410</span></a>
+    </div>
+  </div>
+
+  <div id="O">
+    <div class="letter-title">O</div>
+    <div class="city-grid">
+      <a class="city-card" href="#">Oxford <span>280</span></a>
+    </div>
+  </div>
+
+  <div id="S">
+    <div class="letter-title">S</div>
+    <div class="city-grid">
+      <a class="city-card" href="#">Sheffield <span>470</span></a>
+      <a class="city-card" href="#">Slough <span>230</span></a>
+      <a class="city-card" href="#">Southampton <span>360</span></a>
+      <a class="city-card" href="#">Swansea <span>190</span></a>
+    </div>
+  </div>
+
+  <div id="W">
+    <div class="letter-title">W</div>
+    <div class="city-grid">
+      <a class="city-card" href="#">Warrington <span>200</span></a>
+      <a class="city-card" href="#">Watford <span>180</span></a>
+      <a class="city-card" href="#">Wolverhampton <span>290</span></a>
+      <a class="city-card" href="#">Worcester <span>150</span></a>
+    </div>
+  </div>
+
+  <!-- INFO -->
+  <div class="info-box">
+    <strong>Tip:</strong> Search by city or UK postcode to find nearby businesses quickly. Business counts update automatically as listings grow.
+  </div>
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

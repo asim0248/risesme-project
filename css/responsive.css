@@ -1,0 +1,213 @@
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+/* Small devices (tablets, 768px and up) */
+/* Medium devices (desktops, 992px and up) */
+/* Large devices (large desktops, 1200px and up) */
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+@media (min-width: 1440px){
+.home9-hero-content .banner-style-one .slide {
+    height: 100vh;
+    align-items: center;
+}
+.home1-banner-content{
+  top: 40%;
+}
+}
+@media (min-width: 999px) and (max-width: 1399px) {
+  .service-widget .service-content .title a {
+    width: 90%;
+}
+    .menu_bdrt1 .logos {
+      padding-right: 25px !important;
+    }
+    header.nav-homepage-style .btn-mega {
+    padding-left: 15px !important;
+}
+.home1-banner-content{
+  width: 70% !important;
+}
+}
+@media (min-width: 1401px) and (max-width: 1475px) {
+.home1-banner-content{
+  width: 70% !important;
+}
+}
+
+
+@media only screen and (max-width:1700px) {
+}
+
+@media only screen and (max-width:1600px) {
+
+}
+
+@media only screen and (max-width:1500px) {
+
+}
+
+@media only screen and (max-width:1440px) {
+
+}
+
+@media only screen and (max-width:1400px) {
+
+}
+
+@media only screen and (max-width:1367px) {
+  .service-content .title{
+        white-space: normal;
+  }
+  .ud-btn{
+    padding: 10px 15px;
+  }
+  section.our-cta {
+    margin: 60px 60px 0px!important;
+}
+}
+@media(min-width: 1368px){
+  section.our-cta {
+    margin: 60px auto !important;
+}
+}
+
+/*  (min-width:1280px)+++ */
+@media only screen and (max-width:1280px) {
+
+
+}
+
+/*  (min-width:1200px)+++ */
+@media only screen and (min-width:1200px) {
+}
+
+/*  (max-width:1200px)+++ */
+@media only screen and (max-width:1200px) {
+
+}
+
+/* (min-width:992px) (max-width: 1199.98px) // Large devices (desktops, less than 1200px) */
+@media only screen and (max-width: 1199.98px) {/* ExTra Class Start*/
+    a.header-logo.logo2 img{
+        width: 150px;
+    }
+    .cat-sec .row-2{
+  display: block;
+}
+.cat-sec .row-1{
+  display: none;
+}
+a.header-logo.logo1 img{
+  width: 150px;
+}
+.cat-content{
+  opacity: 1;
+}
+.cat-box:hover .cat-content{
+  opacity: 1;
+}
+}
+
+@media only screen and (max-width:992px) {
+.contact-page-form{
+  padding: 30px 15px !important;
+}
+.login-nav-parent nav {
+    width: 100% !important;
+}
+}
+
+/* Medium devices (min-width:768px) (max-width: 991.98px) // (tablets, less than 992px) */
+@media only screen and (max-width:991px) {/* ExTra Class Start*/
+
+}
+
+@media only screen and (max-width:768px) {
+  .no-jerk{
+    margin-top: 60px;
+  }
+  .home1-banner-content{
+    width: 75%;
+  }
+  .navi_pagi_top_right.owl-theme .owl-nav{
+    left: 0 !important;
+  }
+  section.our-cta {
+    border-radius: 0px !important;
+    margin: 60px 0px 0px!important;
+}
+.service-widget .service-content .title a {
+    width: 90%;
+}
+
+}
+
+/* Small devices (min-width: 576px) (max-width: 767.98px) // (landscape phones, less than 768px) */
+@media only screen and (max-width: 767.98px) {/* ExTra Class Start*/
+
+
+}
+
+@media only screen and (max-width:630px) {
+}
+
+@media only screen and (max-width: 580px) {
+}
+
+/* Extra small devices (min-width:361px) (max-width: 575.98px) // (portrait phones, less than 576px) */
+@media only screen and (max-width: 575.98px) {
+
+}
+
+/* (min-width:361px) (max-width:520px) */
+@media only screen and (max-width:520px) {
+
+}
+
+/* (min-width:480px) (max-width:500px) */
+@media only screen and (max-width:500px) {
+
+}
+
+/* (min-width:361px) (max-width:479px) */
+@media only screen and (max-width:479px) {
+  .home1-banner-content{
+    width: 100%;
+  }
+  .main-title, .main-title2{
+    text-align: center;
+  }
+  .serv-card-btn{
+    text-align: center !important;
+  }
+  section.our-cta .ud-btn {
+    width: 100% !important;
+}
+
+}
+
+@media only screen and (max-width:414px) {
+
+}
+
+@media only screen and (max-width:400px) {/* ExTra Class Start*/
+
+}
+
+/* (min-width:321px) (max-width:360px) */
+@media only screen and (max-width:360px) {
+  a.mobile_logo img {
+    width: 140px;
+}
+}
+
+@media only screen and (max-width:340px) {
+
+}
+
+@media only screen and (max-width:320px) {
+
+}
